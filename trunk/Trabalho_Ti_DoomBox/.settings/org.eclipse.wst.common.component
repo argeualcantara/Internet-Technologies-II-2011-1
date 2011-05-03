@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Trabalho_Ti_DoomBox">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="Trabalho_Ti_DoomBox"/>
+        <property name="java-output-path" value="/Trabalho_Ti_DoomBox/build/classes"/>
+    </wb-module>
+</project-modules>
