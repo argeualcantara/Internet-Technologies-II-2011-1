@@ -21,6 +21,34 @@ public class UsuarioBD {
 		return instance;
 	}
 	
+	public boolean login(Usuario u){
+		try {
+			String sql = "SELECT * FROM USUARIO";
+
+			Connection con = null;
+			Statement st = null;
+			ResultSet rs = null;
+
+			con = BD.getCon();
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			String login=u.getLogin();
+			String senha=u.getSenha();
+
+			while (rs.next()) {
+				String login_usuario = rs.getString("login_usuario");
+				String senha_usuario = rs.getString("senha");
+				if(login_usuario.equalsIgnoreCase(login) && senha_usuario.equals(senha)){
+					return true;
+				}
+				
+			}	
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public void inserir(final Usuario usuario) {
 		try {
 			String sql = "INSERT INTO USUARIO VALUES (?,?,?)";
@@ -30,7 +58,7 @@ public class UsuarioBD {
 
 			con = BD.getCon();
 			st = con.prepareStatement(sql.toString());
-			st.setString(1, usuario.getLogin_usuario());
+			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getNome());
 			st.setString(3, usuario.getSenha());
 			st.executeUpdate();

@@ -2,7 +2,7 @@ package model;
 
 public class Usuario {
 	
-	private String login_usuario;
+	private String login;
 	private String nome;
 	private String senha;
 	
@@ -12,16 +12,16 @@ public class Usuario {
 
 	public Usuario(String login_usuario, String nome, String senha) {
 		super();
-		this.login_usuario = login_usuario;
+		this.login = login_usuario;
 		this.nome = nome;
 		this.senha = senha;
 	}
 	
-	public String getLogin_usuario() {
-		return login_usuario;
+	public String getLogin() {
+		return login;
 	}
-	public void setLogin_usuario(String login_usuario) {
-		this.login_usuario = login_usuario;
+	public void setLogin(String login_usuario) {
+		this.login = login_usuario;
 	}
 	public String getNome() {
 		return nome;

@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>DoomBox</title>
+<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
-Erro!
+O login digitado não existe, você pode se cadastrar clicando <a href="http://localhost:8080/Trabalho_Ti_DoomBox/Cadastrar.do">aqui.</a>
 </body>
 </html>
