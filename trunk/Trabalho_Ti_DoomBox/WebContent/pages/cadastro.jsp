@@ -12,6 +12,7 @@
 <script type="text/javascript" src="js/doombox.js" ></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>DoomBox</title>
+<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
 <html:form  action="Cadastro.do?method=registrar" onsubmit="return checarSenha();">
@@ -26,7 +27,7 @@
 		</tr>
 		<tr>
 			<td>Login:&nbsp;</td>
-			<td><html:text property="login_usuario" />
+			<td><html:text property="login" />
 			<c:if test="${erroLogin=='true' }">
 			<font color="red">Login existente ou inválido</font>
 			</c:if></td>
@@ -43,7 +44,7 @@
 		</tr>
 	</table>
 	<div align="center">
-	<html:submit value="Enviar" />
+	<html:submit value="Enviar" /> <html:button property="voltar" value="Voltar" onclick="javascript: document.location='http://localhost:8080/Trabalho_Ti_DoomBox/Inicio.do';" ></html:button>
 	</div>
 </html:form>
 </body>
