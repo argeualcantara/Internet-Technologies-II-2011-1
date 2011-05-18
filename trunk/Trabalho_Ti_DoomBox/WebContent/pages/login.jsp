@@ -35,7 +35,7 @@ function validarLogin(){
 	</tr>
 	<tr>
 	<td>Senha:</td>
-	<td><html:password styleId="senha" property="senha"></html:password></td>
+	<td><html:password styleId="senha" onkeydown="javascript: if (event.keyCode == 13) {validarLogin();}" property="senha"></html:password></td>
 	<td style="width: 150px;">
 	<font color="red"><c:if test="${requestScope.senhaI=='g'}">Senha incorreta</c:if></font> 
 	</td>

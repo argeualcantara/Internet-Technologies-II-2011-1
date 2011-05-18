@@ -19,18 +19,36 @@ list-style:url("images/favicon.png");
 <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
+
+<c:if test="${sessionScope.login==''|| sessionScope.login==null}">
+	<script>javascript: document.location='http://localhost:8080/Trabalho_Ti_DoomBox/';</script>
+</c:if>
+
 <div align="right" style="padding-left: 80%; height: 80px; width: 200px;">
-&nbsp;Bem-vindo<c:out value=" ${sessionScope.login}"/>
+	Bem-vindo<c:out value=" ${sessionScope.login}"/>
 <a href="http://localhost:8080/Trabalho_Ti_DoomBox/Login.do?method=logout"><img align="right" src="images/logout.gif" alt="Logout" title="Logout" /></a>
 <br/>
 <font style="text-align: left;">Hora do login: <c:out value="${sessionScope.hora}" /></font>
 </div>
-<div align="left" style=" border: infobackground; border-bottom-width:5px; border-color: #62C5d6; border-width: 50px; height: 300px; width: 100px; background-color: #32b5d6;">
-<br/><br/>
-<ul>
-<li><a href="#">Exibir</a></li>
-<li><a href="#">Buscar</a></li>
-</ul>
-</div>
+	<div align="left" style=" border: ridge; border-color: #632525; border-width: 5px; height: 200px; width: 100px; background-color: #aba99e;">
+		<br/><br/>
+		<ul>
+			<li><a href="http://localhost:8080/Trabalho_Ti_DoomBox/Usuario.do?method=trazer&mostrar=exibir">Exibir</a></li>
+			<li><a href="http://localhost:8080/Trabalho_Ti_DoomBox/Usuario.do?method=trazer&mostrar=busca">Buscar</a></li>
+		</ul>
+		<div align="center" style="padding-left:200px; width:500px; height:600px;">
+			<c:choose>
+				<c:when test="${busca!=null}">
+					<jsp:include page="busca.jsp"/>
+				</c:when>
+				<c:when test="${exibir!=null}">
+					<jsp:include page="busca.jsp"/>
+				</c:when>
+			</c:choose>
+			<c:if test="${lista!=null}">
+				<jsp:include page="listarArquivos.jsp"/>
+			</c:if>
+		</div>
+	</div>
 </body>
 </html>

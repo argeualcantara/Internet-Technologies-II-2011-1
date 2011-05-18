@@ -7,6 +7,7 @@
 <struts-config>
 	<form-beans>
 		<form-bean name="usuarioForm" type="form.UsuarioForm"></form-bean>
+		<form-bean name="arquivoForm" type="form.ArquivoForm"></form-bean>
 	</form-beans>
 
 	<global-forwards>
@@ -31,6 +32,12 @@
 		<action path="/Inicio" 
 			type="action.UsuarioAction" name="usuarioForm"
 			scope="request" parameter="method" validate="false" forward="/pages/login.jsp"/>
+			
+			<action path="/Usuario" 
+			type="action.UsuarioAction" name="arquivoForm"
+			scope="request" parameter="method" validate="false">
+				<forward name="exibirDiv" path="/pages/inicio.jsp"></forward>
+			</action>
 		
 		<action path="/Cadastrar" forward="/pages/cadastro.jsp" />
 		
