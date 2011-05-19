@@ -31,3 +31,12 @@ function checarSenha() {
 	return valido;
 
 }
+
+function excluir(id){
+	var apagar=confirm('Deseja excluir o arquivo/pasta?\nSe for uma pasta, todos os seus arquivos serão apagados');
+	if(apagar){
+		alert('apagou');
+	}else{
+		alert('não apagou');
+	}
+}
