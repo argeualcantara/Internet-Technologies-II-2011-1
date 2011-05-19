@@ -28,7 +28,8 @@ function validarLogin(){
 </head>
 <body>
 <html:form styleId="form" action="Login.do?method=login">
-	<table style="padding-top: 20%; padding-left: 200px;" align="center">
+<div style="padding-left:100px; height:500px; width:1280px; background-image: url('images/bg.jpg');">
+	<table style="padding-top: 20%; left: 270px; " align="center">
 	<tr>
 	<td>Login:</td>
 	<td><html:text styleId="login" property="login"></html:text></td>
@@ -45,9 +46,7 @@ function validarLogin(){
 	<td colspan="2" align="right"><html:button property="envio" value="Entrar" onclick="validarLogin();" ></html:button>&nbsp;<a href='http://localhost:8080/Trabalho_TI_DB/Cadastrar.do'>Cadastrar-se</a></td>
 	</tr>
 	</table>
-	
-	
-	 
+	</div>
 </html:form>
 </body>
 </html>

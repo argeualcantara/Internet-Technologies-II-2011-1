@@ -11,7 +11,7 @@
 	<table>
 		<tr>
 			<td style="text-align: right;">Nome do diretório</td>
-			<td ><html:text property="nome"/></td>
+			<td ><html:text style="border: ridge; border-color: #000000; border-width: 1px;" property="nome"/></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align: center;"><html:button property="criar" value="Enviar" onclick="criarDiretorio();"/></td>

@@ -6,7 +6,7 @@
 <%@taglib prefix="c" uri="/WEB-INF/c.tld"%>
 <%@page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div style="padding-top: 50px;">
+<div style="padding-top: 105px;">
 <table cellpadding="2" cellspacing="2" border="1">
 	<tr style="background-color: #3879da; color: white;">
 		<td>Nome</td>
@@ -16,7 +16,7 @@
 		<td>Tamanho</td>
 	</tr>
 	<c:forEach items="${arquivos}" var="a" >
-		<tr>
+		<tr style="background-color: white;" >
 			<c:if test="${a.diretorio==false}">
 			<td><a title="Download" href="#"><c:out value="${a.nome}" /></a></td>
 			<td><c:out value="${a.descricao}" /></td>

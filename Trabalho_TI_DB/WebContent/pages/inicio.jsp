@@ -11,7 +11,7 @@
 <style type="text/css">
 ul 
 {
-list-style:url("images/favicon.png");
+list-style-type: none;
 }
 </style>
 <script type="text/javascript" src="js/doombox.js" ></script>
@@ -20,7 +20,7 @@ list-style:url("images/favicon.png");
 <title>DoomBox</title>
 <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
-<body>
+<body alink="blue" link="blue" vlink="blue" >
 
 <c:if test="${sessionScope.login==null || sessionScope.login==''}">
 	<script>javascript: document.location='http://localhost:8080/Trabalho_TI_DB/';</script>
@@ -32,25 +32,29 @@ list-style:url("images/favicon.png");
 <br/>
 <font style="text-align: left;">Hora do login: <c:out value="${sessionScope.hora}" /></font>
 </div>
-	<div align="left" style="border: ridge; border-color: #aba9a6; border-width: 5px; height: 200px; width: 100px; background-color: #aba99e;">
+	<div align="left" style="border: ridge; border-color: #aba9a6; border-width: 5px; height: 200px; width: 100px; background-color: #c1c1c1;">
 		<br/><br/>
 		<ul>
 			<li><a href="http://localhost:8080/Trabalho_TI_DB/Usuario.do?method=exibirArquivos">Exibir</a></li>
 			<li><a href="http://localhost:8080/Trabalho_TI_DB/Usuario.do?method=trazer&mostrar=busca">Buscar</a></li>
 		</ul>
-		<div align="center" style="position:absolute; top:100px; left:200px; width:500px; height:700px;">
+		<div align="center" style="border: ridge; border-color: #aba9a6; border-width: 5px; background-color: #c1c1c1; position:absolute; top:90px; left:200px; width:500px; height:570px;">
 			<c:choose>
 				<c:when test="${busca!=null}">
 					<jsp:include page="busca.jsp"/>
 				</c:when>
 				<c:when test="${exibir!=null}">
-					<div id="uploadDiv">
-					<div align="left" style="font-size: 12px; border-width:1px; border:thin; border-style:solid; border-color: #000000;">
+					<div id="uploadDiv" >
+					<div align="left" style="font-size: 12px; border-width:1px; background-color:#FFFFFF; border:thin; border-style:solid; border-color: #000000;">
 					<jsp:include page="exibir.jsp"/>
+					<br/>
 					</div>
 					<br/><br/>
+					<div style=" width:200px; border: ridge; border-color: #aba9a6; border-width: 5px; background-color: #FFFFFF;" >
 					<input type="radio" name="radio" id="radio" value="arquivo" onclick="radioDiv();"/>Arquivo &nbsp;&nbsp;&nbsp;
 					<input type="radio" name="radio" id="radio" value="direorio" onclick="radioDiv();"/>Diretório
+					</div>
+					<br/>
 					<div id="arquivoDiv" style="visibility: hidden;">
 						<jsp:include page="enviarArquivo.jsp"></jsp:include>
 					</div>
