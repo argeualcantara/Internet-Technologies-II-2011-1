@@ -13,10 +13,10 @@
 		<c:when test="${a.diretorio==true}">
 			<c:choose>
 				<c:when test="${a.nome!='Doom Box' }">
-					&nbsp;<input type="checkbox" id="<c:out value="${a.id}"/>" /> ${a.nome} <img onclick="excluir(<c:out value="${a.id}"/>);" src="images/li.png"/><br/>
+					&nbsp;<input type="checkbox" id="<c:out value="${a.id}"/>" /><img src="images/folder.png"/> ${a.nome} <img onclick="excluir(<c:out value="${a.id}"/>);" src="images/excluir.png"/><br/>
 				</c:when>
 				<c:when test="${a.nome=='Doom Box' }">
-					&nbsp;<input type="checkbox" id="<c:out value="${a.id}"/>" /> ${a.nome} <br/>
+					&nbsp;<input type="checkbox" id="<c:out value="${a.id}"/>" /><img src="images/folder.png"/> ${a.nome} <br/>
 				</c:when>
 			</c:choose>
 		</c:when>
@@ -24,8 +24,9 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="checkbox" id="<c:out value="${a.id}"/>"/> 
+			<img src="images/file.png"/>
 			<a title="Download" href="#"><c:out value="${a.nome}" /></a>
-			<img onclick="excluir(<c:out value="${a.id}"/>);" src="images/li.png"/><br/>
+			<img onclick="excluir(<c:out value="${a.id}"/>);" src="images/excluir.png"/><br/>
 		</c:when>
 	</c:choose>
 </c:forEach>

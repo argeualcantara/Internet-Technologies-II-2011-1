@@ -22,14 +22,14 @@
 			<td><c:out value="${a.descricao}" /></td>
 			<td>Arquivo</td>
 			<td><c:out value="${a.data}" /></td>
-			<td><c:out value="${a.bytes * 1024} kb" /></td>
+			<td><c:out value="${a.bytes / 1024} kb" /></td>
 			</c:if>
 			<c:if test="${a.diretorio==true}">
 			<td><c:out value="${a.nome}" /></td>
 			<td><c:out value="${a.descricao}" /></td>
 			<td>Diretório</td>
-			<td><c:out value="${a.data}" /></td>
-			<td><c:out value="${a.bytes * 1024} kb" /></td>
+			<td>--</td>
+			<td>--</td>
 			</c:if>
 		</tr>
 	</c:forEach>
