@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div style="padding-top: 50px;">
 <table cellpadding="2" cellspacing="2" border="1">
-	<tr>
+	<tr style="background-color: #3879da; color: white;">
 		<td>Nome</td>
 		<td>Descrição</td>
 		<td>Tipo</td>
@@ -17,13 +17,20 @@
 	</tr>
 	<c:forEach items="${arquivos}" var="a" >
 		<tr>
-			<td><c:out value="${a.nome}" /></td>
+			<c:if test="${a.diretorio==false}">
+			<td><a title="Download" href="#"><c:out value="${a.nome}" /></a></td>
 			<td><c:out value="${a.descricao}" /></td>
-			<c:if test="${a.diretorio==true}">
-			<td>Diretório</td>
-			</c:if>
+			<td>Arquivo</td>
 			<td><c:out value="${a.data}" /></td>
 			<td><c:out value="${a.bytes * 1024} kb" /></td>
+			</c:if>
+			<c:if test="${a.diretorio==true}">
+			<td><c:out value="${a.nome}" /></td>
+			<td><c:out value="${a.descricao}" /></td>
+			<td>Diretório</td>
+			<td><c:out value="${a.data}" /></td>
+			<td><c:out value="${a.bytes * 1024} kb" /></td>
+			</c:if>
 		</tr>
 	</c:forEach>
 </table>

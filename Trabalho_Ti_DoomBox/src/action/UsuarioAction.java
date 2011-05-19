@@ -37,7 +37,7 @@ public class UsuarioAction extends DispatchAction {
 			if (UsuarioBD.getInstance().login(user)) {
 				HttpSession session = request.getSession();
 				Date data = new Date();
-				SimpleDateFormat f = new SimpleDateFormat("hh:mm");
+				SimpleDateFormat f = new SimpleDateFormat("HH:mm");
 				String hora = f.format(data);
 				session.setAttribute("hora", hora);
 				session.setAttribute("login", user.getLogin());
@@ -70,6 +70,7 @@ public class UsuarioAction extends DispatchAction {
 			request.setAttribute("busca", true);
 		}else{
 			request.setAttribute("exibir", true);
+			exibirArquivos(mapping, form, request, response);
 		}
 		return mapping.findForward("exibirDiv");
 	}
@@ -110,6 +111,17 @@ public class UsuarioAction extends DispatchAction {
 				request.setAttribute("arquivos", arquivos);
 				request.setAttribute("lista", true);
 				request.setAttribute("busca", true);
+				return mapping.findForward("exibirDiv");
+	}
+	
+	public ActionForward exibirArquivos(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+				HttpSession session=request.getSession();
+				String login=session.getAttribute("login").toString();
+				List<Arquivo> arquivos = ArquivoBD.getInstance().listarArquivos(login, "");
+				request.setAttribute("arquivos", arquivos);
+				request.setAttribute("exibir", true);
 				return mapping.findForward("exibirDiv");
 	}
 }
