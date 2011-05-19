@@ -44,7 +44,7 @@
 		</tr>
 	</table>
 	<div align="center">
-	<html:submit value="Enviar" /> <html:button property="voltar" value="Voltar" onclick="javascript: document.location='http://localhost:8080/Trabalho_Ti_DoomBox/Inicio.do';" ></html:button>
+	<html:submit value="Enviar" /> <html:button property="voltar" value="Voltar" onclick="javascript: document.location='http://localhost:8080/Trabalho_TI_DB/Inicio.do';" ></html:button>
 	</div>
 </html:form>
 </body>

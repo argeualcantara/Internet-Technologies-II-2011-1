@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Arquivo {
 	private int id;
 	private String nome;
@@ -9,13 +11,14 @@ public class Arquivo {
 	private String bytes;
 	private String login;
 	private String descricao;
+	private List<Arquivo> files;
 	
 	public Arquivo() {
 		
 	}
 	
 	public Arquivo(int id, String nome, int pai, boolean diretorio,
-			String data, String bytes, String login, String descricao) {
+			String data, String bytes, String login, String descricao, List<Arquivo> files) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -25,8 +28,17 @@ public class Arquivo {
 		this.bytes = bytes;
 		this.login = login;
 		this.descricao = descricao;
+		this.files=files;
 	}
 	
+	public List<Arquivo> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<Arquivo> files) {
+		this.files = files;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -46,6 +58,9 @@ public class Arquivo {
 		this.pai = pai;
 	}
 	public boolean isDiretorio() {
+		return diretorio;
+	}
+	public boolean getDiretorio() {
 		return diretorio;
 	}
 	public void setDiretorio(boolean diretorio) {

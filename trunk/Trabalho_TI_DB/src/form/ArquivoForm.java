@@ -1,12 +1,16 @@
 package form;
 
+import java.util.List;
+
+import model.Arquivo;
+
 import org.apache.struts.action.ActionForm;
 
 public class ArquivoForm extends ActionForm{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4962169864022907048L;
+	private static final long serialVersionUID = -8047686004379758733L;
 	private int id;
 	private String nome;
 	private int pai;
@@ -15,13 +19,14 @@ public class ArquivoForm extends ActionForm{
 	private String bytes;
 	private String login;
 	private String descricao;
+	private List<Arquivo> files;
 	
 	public ArquivoForm() {
 		
 	}
 	
 	public ArquivoForm(int id, String nome, int pai, boolean diretorio,
-			String data, String bytes, String login, String descricao) {
+			String data, String bytes, String login, String descricao, List<Arquivo> files) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -31,8 +36,17 @@ public class ArquivoForm extends ActionForm{
 		this.bytes = bytes;
 		this.login = login;
 		this.descricao = descricao;
+		this.files=files;
 	}
 	
+	public List<Arquivo> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<Arquivo> files) {
+		this.files = files;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -51,7 +65,7 @@ public class ArquivoForm extends ActionForm{
 	public void setPai(int pai) {
 		this.pai = pai;
 	}
-	public boolean isDiretorio() {
+	public boolean getDiretorio() {
 		return diretorio;
 	}
 	public void setDiretorio(boolean diretorio) {
