@@ -40,3 +40,16 @@ function excluir(id){
 		alert('não apagou');
 	}
 }
+
+function radioDiv(){
+	var divArq=document.getElementById('arquivoDiv');
+	var divDir=document.getElementById('diretorioDiv');
+	var radio=document.getElementById('radio');
+	if(radio.checked==true){
+		divArq.setAttribute("style", 'position:absolute; left:100px; top:350px; visibility: visible;');
+		divDir.setAttribute("style", 'position:absolute; left:100px; top:350px; visibility: hidden;');
+	}else{
+		divDir.setAttribute("style", 'position:absolute; left:100px; top:350px; visibility: visible;');
+		divArq.setAttribute("style", 'position:absolute; left:100px; top:350px; visibility: hidden;');
+	}
+}

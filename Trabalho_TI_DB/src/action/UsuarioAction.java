@@ -1,6 +1,7 @@
 package action;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,7 +108,7 @@ public class UsuarioAction extends DispatchAction {
 				HttpSession session=request.getSession();
 				String login=session.getAttribute("login").toString();
 				String nome = ((ArquivoForm)form).getNome();
-				List<Arquivo> arquivos = ArquivoBD.getInstance().listarArquivos(login, nome);
+				List<Arquivo> arquivos = ArquivoBD.getInstance().buscarArquivos(login, nome);
 				request.setAttribute("arquivos", arquivos);
 				request.setAttribute("lista", true);
 				request.setAttribute("busca", true);
@@ -118,10 +119,16 @@ public class UsuarioAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 				HttpSession session=request.getSession();
+				if(session.getAttribute("login")!=null){
 				String login=session.getAttribute("login").toString();
-				List<Arquivo> arquivos = ArquivoBD.getInstance().listarArquivos(login, "");
-				request.setAttribute("arquivos", arquivos);
+				List<Arquivo> tudo = ArquivoBD.getInstance().listarArquivos(login,"");
+				
+				request.setAttribute("arquivos", tudo);
 				request.setAttribute("exibir", true);
 				return mapping.findForward("exibirDiv");
+				}else{
+					return mapping.findForward("welcome");
+				}
+				
 	}
 }

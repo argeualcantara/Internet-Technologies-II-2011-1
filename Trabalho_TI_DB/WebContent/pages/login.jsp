@@ -42,7 +42,7 @@ function validarLogin(){
 	</tr>
 	<tr>
 	
-	<td colspan="2" align="right"><html:button property="envio" value="Entrar" onclick="validarLogin();" ></html:button>&nbsp;<a href='http://localhost:8080/Trabalho_Ti_DoomBox/Cadastrar.do'>Cadastrar-se</a></td>
+	<td colspan="2" align="right"><html:button property="envio" value="Entrar" onclick="validarLogin();" ></html:button>&nbsp;<a href='http://localhost:8080/Trabalho_TI_DB/Cadastrar.do'>Cadastrar-se</a></td>
 	</tr>
 	</table>
 	
