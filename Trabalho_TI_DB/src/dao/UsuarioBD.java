@@ -13,6 +13,7 @@ import model.Usuario;
 public class UsuarioBD {
 	
 	private static UsuarioBD instance;
+	private static final String role = "user";
 	
 	public static UsuarioBD getInstance(){
 		if(instance == null){
@@ -51,7 +52,7 @@ public class UsuarioBD {
 	
 	public void inserir(final Usuario usuario) {
 		try {
-			String sql = "INSERT INTO USUARIO VALUES (?,?,?)";
+			String sql = "INSERT INTO USUARIO VALUES (?,?,?,?)";
 
 			Connection con = null;
 			PreparedStatement st = null;
@@ -61,6 +62,7 @@ public class UsuarioBD {
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getNome());
 			st.setString(3, usuario.getSenha());
+			st.setString(4, role);
 			st.executeUpdate();
 			BD.closeCon();
 		} catch (SQLException e) {
