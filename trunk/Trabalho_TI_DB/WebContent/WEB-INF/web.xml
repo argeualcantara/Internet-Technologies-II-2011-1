@@ -64,19 +64,12 @@
 		<taglib-location>/WEB-INF/c.tld</taglib-location>
 	</taglib>
 
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/pages/login.jsp</form-login-page>
-			<form-error-page>/pages/erro.jsp</form-error-page>
-		</form-login-config>
-	</login-config>
+	
 
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>paginas</web-resource-name>
-			<url-pattern>/Usuario*</url-pattern>
-			<url-pattern>/j_*</url-pattern>
+			<url-pattern>/Trabalho_TI_DB*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>user</role-name>
