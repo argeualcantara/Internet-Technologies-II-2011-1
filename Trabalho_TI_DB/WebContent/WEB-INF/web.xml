@@ -63,11 +63,19 @@
 		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
 		<taglib-location>/WEB-INF/c.tld</taglib-location>
 	</taglib>
-
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/Inicio.do</form-login-page>
+			<form-error-page>/pages/erro.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+	
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>paginas</web-resource-name>
-			<url-pattern>/Trabalho_TI_DB*</url-pattern>
+			<url-pattern>*.do</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>user</role-name>
@@ -80,5 +88,16 @@
 	<security-role>
 		<role-name>user</role-name>
 	</security-role>
+
+ <servlet>
+    <display-name>Cadastro</display-name>
+    <servlet-name>Cadastro</servlet-name>
+    <servlet-class>servlet.Cadastro</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Cadastro</servlet-name>
+    <url-pattern>/Cadastro</url-pattern>
+  </servlet-mapping>
 
 </web-app>
