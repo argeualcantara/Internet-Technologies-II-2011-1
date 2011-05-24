@@ -8,6 +8,6 @@
 <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
-O login digitado não existe, você pode se cadastrar clicando <a href="http://localhost:8080/Trabalho_TI_DB/Cadastrar.do">aqui.</a>
+O login digitado não existe ou a senha entrada é inválida, você pode se cadastrar clicando <a href="http://localhost:8080/Trabalho_TI_DB/pages/cadastro.jsp">aqui.</a>
 </body>
 </html>

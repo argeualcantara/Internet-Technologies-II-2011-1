@@ -29,26 +29,36 @@ public class UsuarioAction extends DispatchAction {
 		UsuarioForm uf = (UsuarioForm) form;
 		Usuario user = new Usuario();
 
-		if (uf.getLogin().trim().length() > 0
-				&& uf.getSenha().trim().length() > 0 && uf.getLogin() != null
-				&& uf.getLogin() != null) {
-			user.setLogin(uf.getLogin());
+		if (request.getRemoteUser().toString().trim().length() > 0
+				&& request.getRemoteUser() != null) {
+			user.setLogin(request.getRemoteUser().toString());
 			user.setSenha(uf.getSenha());
-			if (UsuarioBD.getInstance().login(user)) {
+			
 				HttpSession session = request.getSession();
+				session.setAttribute("hora", request.getAttribute("hora"));
+				session.setAttribute("login", request.getAttribute("login"));
+				return mapping.findForward("login");
+			
+		}
+		return mapping.findForward("erro");
+
+	}
+	
+	public ActionForward loginPreparar(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Usuario user = new Usuario();
+
+		if (request.getRemoteUser() != null && request.getRemoteUser().toString().trim().length() > 0) {
+			user.setLogin(request.getRemoteUser().toString());
+			
 				Date data = new Date();
 				SimpleDateFormat f = new SimpleDateFormat("HH:mm");
 				String hora = f.format(data);
-				session.setAttribute("hora", hora);
-				session.setAttribute("login", user.getLogin());
-				return mapping.findForward("login");
-			}
+				request.setAttribute("hora", hora);
+				request.setAttribute("login", user.getLogin());
+				return login(mapping, form, request, response);
 		}
-		if (!UsuarioBD.getInstance().validarLigin(user.getLogin())) {
-			request.setAttribute("senhaI", 'g');
-			return mapping.findForward("logout");
-		}
-		((UsuarioForm) form).setSenha("");
 		return mapping.findForward("erro");
 
 	}
@@ -57,8 +67,10 @@ public class UsuarioAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		HttpSession session = request.getSession();
+		request.getRemoteUser();
 		session.removeAttribute("hora");
 		session.removeAttribute("login");
+		session.invalidate();
 		return mapping.findForward("logout");
 	}
 	
@@ -98,14 +110,19 @@ public class UsuarioAction extends DispatchAction {
 			return mapping.findForward("erro");
 		}
 
-		return mapping.findForward("inicio");
+		return mapping.findForward("login");
 	}
 	
 	public ActionForward buscarArquivos(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 				HttpSession session=request.getSession();
-				String login=session.getAttribute("login").toString();
+				String login=request.getRemoteUser().toString();
+				session.setAttribute("login", login);
+				Date data=new Date();
+				SimpleDateFormat f = new SimpleDateFormat("HH:mm");
+				String hora = f.format(data);
+				session.setAttribute("hora", hora);
 				String nome = ((ArquivoForm)form).getNome();
 				List<Arquivo> arquivos = ArquivoBD.getInstance().buscarArquivos(login, nome);
 				request.setAttribute("arquivos", arquivos);
@@ -118,16 +135,19 @@ public class UsuarioAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 				HttpSession session=request.getSession();
-				if(session.getAttribute("login")!=null){
-				String login=session.getAttribute("login").toString();
+				
+				String login=request.getRemoteUser().toString();
+				session.setAttribute("login", login);
+				Date data=new Date();
+				SimpleDateFormat f = new SimpleDateFormat("HH:mm");
+				String hora = f.format(data);
+				session.setAttribute("hora", hora);
 				List<Arquivo> tudo = ArquivoBD.getInstance().listarArquivos(login,"");
 				
 				request.setAttribute("arquivos", tudo);
 				request.setAttribute("exibir", true);
 				return mapping.findForward("exibirDiv");
-				}else{
-					return mapping.findForward("welcome");
-				}
+				
 				
 	}
 }

@@ -22,10 +22,6 @@ list-style-type: none;
 </head>
 <body alink="blue" link="blue" vlink="blue" >
 
-<c:if test="${sessionScope.login==null || sessionScope.login==''}">
-	<script>javascript: document.location='http://localhost:8080/Trabalho_TI_DB/';</script>
-</c:if>
-
 <div align="right" style="padding-left: 80%; height: 80px; width: 200px;">
 	Bem-vindo<c:out value=" ${sessionScope.login}"/>
 <a href="http://localhost:8080/Trabalho_TI_DB/Login.do?method=logout"><img align="right" border="0" src="images/logout.gif" alt="Logout" title="Logout" /></a>
