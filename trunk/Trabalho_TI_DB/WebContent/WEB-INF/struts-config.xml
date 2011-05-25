@@ -8,6 +8,7 @@
 	<form-beans>
 		<form-bean name="usuarioForm" type="form.UsuarioForm"></form-bean>
 		<form-bean name="arquivoForm" type="form.ArquivoForm"></form-bean>
+		<form-bean name="uploadForm" type="form.UploadForm"></form-bean>
 	</form-beans>
 
 	<global-forwards>
@@ -27,6 +28,20 @@
 		<forward name="login" path="/pages/inicio.jsp"></forward>
 		<forward name="logout" path="/pages/login.jsp"></forward>
 		<forward name="erro" path="/pages/login.jsp"></forward>
+		</action>
+		
+		<action path="/transacaoUpload" 
+			type="action.UploadAction" name="uploadForm"
+			scope="request" parameter="method" validate="false">
+		<forward name="sucesso" path="/pages/sucesso.html"></forward>
+		</action>
+		
+		<action path="/Login" 
+			type="action.UsuarioAction" name="usuarioForm"
+			scope="request" parameter="method" validate="false">
+		<forward name="login" path="/pages/inicio.jsp"></forward>
+		<forward name="logout" path="/pages/login.jsp"></forward>
+		<forward name="erro" path="/pages/erro.jsp"></forward>
 		</action>
 		
 		<action path="/Inicio" 
