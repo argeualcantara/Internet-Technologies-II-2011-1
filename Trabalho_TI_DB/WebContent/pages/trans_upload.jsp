@@ -22,17 +22,29 @@
 <h1>Importação de Arquivo</h1>
 
 
+
+
 <html:form action="transacaoUpload.do?method=upload"
 	enctype="multipart/form-data">
 
+	<table>
+		<tr>
+			<td><html:file name="uploadForm" property="arquivo"
+				styleClass="required" title="Informe o Caminho do Arquivo." /></td>
 
-
-	<html:file name="uploadForm" property="arquivo" styleClass="required"
-		title="Informe o Caminho do Arquivo." />
-
-	<html:submit value="enviar" />
-
-
+		</tr>
+		<tr>
+			<td><html:checkbox property="pais" value="2">Dropbox</html:checkbox></td>
+			<td><html:checkbox property="pais" value="7">Pasta 1</html:checkbox></td>
+		</tr>
+		<tr>
+			<td colspan="3">Descricao: <html:text property="descricao"></html:text>
+			</td>
+		</tr>
+		<tr>
+			<td><html:submit value="enviar" /></td>
+		</tr>
+	</table>
 
 </html:form>
 

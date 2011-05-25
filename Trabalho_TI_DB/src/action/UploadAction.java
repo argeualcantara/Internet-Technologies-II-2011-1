@@ -1,9 +1,7 @@
 package action;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +12,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
+
+import dao.ArquivoBD;
 
 import form.UploadForm;
 
@@ -31,16 +31,38 @@ public class UploadAction extends DispatchAction {
 		try {
 
 	        FormFile formFile = uploadForm.getArquivo();
+	        String[] pais = uploadForm.getPais();
+	        String descricao = uploadForm.getDescricao();
 	
-			String strFileName = formFile.getFileName();		
-	
+			String strFileName = formFile.getFileName();
+			
+			System.out.println(strFileName);
+			int ponto = strFileName.lastIndexOf(".");
+			String nome = strFileName.substring(0, ponto);
+			String extensao = strFileName.substring(ponto);
+			
+			System.out.println("nome: "+nome);
+			System.out.println("extensão: "+extensao);
+			long tamanho = formFile.getFileSize();
+			int id = 0;
+			
+			// AUMENTAR O TAMANHO DO VARCHAR DE NOME!
+			for (int i = 0; i < pais.length; i++) {
+				id = ArquivoBD.getInstance().inserirArquivo(nome, Integer.parseInt(pais[i]), tamanho, "MASTER", descricao);
+				System.out.println(id);
+			}
+			
+			System.out.println("Tamanho: "+tamanho);
+			String nomeArq = "Arquivo_"+id+extensao;
+			
 			byte dataFile[] = formFile.getFileData();
 	
-			File file = new File("C:/Temp/" + strFileName);
+			File file = new File("C:/Temp/" + nomeArq);
 	
 			OutputStream out = new FileOutputStream(file);
 			out.write(dataFile);
 			out.close();
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

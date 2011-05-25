@@ -5,22 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Arquivo;
 
 public class ArquivoBD {
-private static ArquivoBD instance;
-	
-	public static ArquivoBD getInstance(){
-		if(instance == null){
+	private static ArquivoBD instance;
+
+	public static ArquivoBD getInstance() {
+		if (instance == null) {
 			instance = new ArquivoBD();
 		}
 		return instance;
 	}
-	
-	public List<Arquivo> buscarArquivos(String login, String nome){
+
+	public List<Arquivo> buscarArquivos(String login, String nome) {
 		List<Arquivo> list = new ArrayList<Arquivo>();
 		try {
 			String sql = "SELECT * FROM ARQ_DIR WHERE NOME LIKE ?";
@@ -31,12 +34,14 @@ private static ArquivoBD instance;
 
 			con = BD.getCon();
 			st = con.prepareStatement(sql);
-			st.setString(1, "%"+nome+"%");
+			st.setString(1, "%" + nome + "%");
 			rs = st.executeQuery();
 
 			while (rs.next()) {
-				Arquivo a=new Arquivo(); 
-				if(rs.getString("login_usuario")!=null && rs.getString("login_usuario").equalsIgnoreCase(login)){
+				Arquivo a = new Arquivo();
+				if (rs.getString("login_usuario") != null
+						&& rs.getString("login_usuario")
+								.equalsIgnoreCase(login)) {
 					a.setId(rs.getInt("id"));
 					a.setNome(rs.getString("nome"));
 					a.setPai(rs.getInt("pai"));
@@ -47,14 +52,71 @@ private static ArquivoBD instance;
 					a.setDescricao(rs.getString("descricao"));
 					list.add(a);
 				}
-			}	
-		}catch(SQLException e){
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
-	public List<Arquivo> listarArquivos(String login, String nome){
+
+	public int buscarIdArquivo(String login, String descricao, Timestamp time) {
+		int id = 0;
+		Connection con = null;
+		try {
+			String sql = "SELECT * FROM ARQ_DIR WHERE DESCRICAO = ? AND LOGIN_USUARIO = ? AND DATA = ?";
+
+			PreparedStatement st = null;
+			ResultSet rs = null;
+
+			con = BD.getCon();
+			st = con.prepareStatement(sql);
+			st.setString(1, descricao);
+			st.setString(2, login);
+			st.setTimestamp(3, time);
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getInt("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			BD.closeCon();
+		}
+		return id;
+	}
+
+	public int inserirArquivo(String nome, int pai, long bytes, String login,
+			String descricao) {
+		Timestamp time = null;
+		try {
+			String sql = "insert into arq_dir (nome, pai, diretorio, data, bytes, login_usuario, descricao)"
+					+ "values (?, ?, 0, ?, ?, ?, ?)";
+
+			Connection con = null;
+			PreparedStatement st = null;
+
+			con = BD.getCon();
+			st = con.prepareStatement(sql);
+			st.setString(1, nome);
+			st.setInt(2, pai);
+			time = buscarDataAtual();
+			st.setTimestamp(3, time);
+			st.setLong(4, bytes);
+			st.setString(5, login);
+			st.setString(6, descricao);
+
+			st.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BD.closeCon();
+		}
+		return buscarIdArquivo(login, descricao, time);
+	}
+
+	public List<Arquivo> listarArquivos(String login, String nome) {
 		List<Arquivo> list = new ArrayList<Arquivo>();
 		try {
 			String sql = "SELECT * FROM ARQ_DIR";
@@ -68,8 +130,8 @@ private static ArquivoBD instance;
 			rs = st.executeQuery(sql);
 
 			while (rs.next()) {
-				Arquivo a=new Arquivo(); 
-				if(rs.getString("nome").equalsIgnoreCase("doom box")){
+				Arquivo a = new Arquivo();
+				if (rs.getString("nome").equalsIgnoreCase("doom box")) {
 					a.setId(rs.getInt("id"));
 					a.setNome(rs.getString("nome"));
 					a.setPai(rs.getInt("pai"));
@@ -78,17 +140,17 @@ private static ArquivoBD instance;
 					a.setBytes(rs.getString("bytes"));
 					a.setLogin(rs.getString("login_usuario"));
 					a.setDescricao(rs.getString("descricao"));
-					a.setFiles(this.buscarFiles(a.getId(),login));
+					a.setFiles(this.buscarFiles(a.getId(), login));
 					list.add(a);
 				}
-			}	
-		}catch(SQLException e){
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-	private List<Arquivo> buscarFiles(int pai,String login) {
+	private List<Arquivo> buscarFiles(int pai, String login) {
 		List<Arquivo> list = new ArrayList<Arquivo>();
 		try {
 			String sql = "SELECT * FROM ARQ_DIR WHERE PAI=?";
@@ -103,8 +165,10 @@ private static ArquivoBD instance;
 			rs = st.executeQuery();
 
 			while (rs.next()) {
-				Arquivo a=new Arquivo(); 
-				if(rs.getString("login_usuario")!=null && rs.getString("login_usuario").equalsIgnoreCase(login)){
+				Arquivo a = new Arquivo();
+				if (rs.getString("login_usuario") != null
+						&& rs.getString("login_usuario")
+								.equalsIgnoreCase(login)) {
 					a.setId(rs.getInt("id"));
 					a.setNome(rs.getString("nome"));
 					a.setPai(rs.getInt("pai"));
@@ -113,16 +177,26 @@ private static ArquivoBD instance;
 					a.setBytes(rs.getString("bytes"));
 					a.setLogin(rs.getString("login_usuario"));
 					a.setDescricao(rs.getString("descricao"));
-					if(rs.getBoolean("diretorio")){
-						a.setFiles(this.buscarFiles(a.getId(),login));
+					if (rs.getBoolean("diretorio")) {
+						a.setFiles(this.buscarFiles(a.getId(), login));
 					}
 					list.add(a);
 				}
-			}	
-		}catch(SQLException e){
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
+
+	private Timestamp buscarDataAtual() throws Exception{
+		Timestamp time = null;
+		Date data = new Date();
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String dataAtual = f.format(data);
+		data = f.parse(dataAtual);
+		time = new Timestamp(data.getTime());
+		
+		return time;
+	}
 }
