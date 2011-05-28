@@ -22,12 +22,17 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:set value="${espaco+1 }" scope="request" var="espaco"/>
-			<input type="checkbox" id="<c:out value="${a.id}"/>" /><img src="images/folder.png"/> ${a.nome} <img onclick="excluir(<c:out value="${a.id}"/>);" src="images/excluir.png"/><br/>
+				<input type="checkbox" id="pais" name="pais" value="<c:out value="${a.id}"/>" />
+				<img src="images/folder.png"/>
+				<c:out value="${a.nome}"/> 
+				<img onclick="excluir(<c:out value="${a.id}"/>);" src="images/excluir.png"/> 
+				<br/>
 					
 				</c:when>
 				<c:when test="${a.id==1}">
 				<c:set value="0" scope="request" var="espaco"/>
-					<input type="checkbox" id="<c:out value="${a.id}"/>" /><img src="images/folder.png"/> ${a.nome} <br/>
+				<input type="checkbox" id="pais" name="pais" value="<c:out value="${a.id}"/>" />
+					<img src="images/folder.png"/> <c:out value="${a.nome}"/><br/>
 				</c:when>
 			</c:choose>
 		</c:when>
@@ -40,7 +45,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</c:forEach>
 			
-			<input type="checkbox" id="<c:out value="${a.id}"/>"/> 
+			<input type="checkbox" id="pais" name="pais" value="<c:out value="${a.id}"/>" />
 			<img src="images/file.png"/>
 			<a title="Download" href="#"><c:out value="${a.nome}" /></a>
 			<img onclick="excluir(<c:out value="${a.id}"/>);" src="images/excluir.png"/><br/>

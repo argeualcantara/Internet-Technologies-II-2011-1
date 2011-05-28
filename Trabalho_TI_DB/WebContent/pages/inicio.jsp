@@ -21,7 +21,7 @@ list-style-type: none;
 <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <body alink="blue" link="blue" vlink="blue" >
-
+<html:form action="transacaoUpload.do?method=upload" enctype="multipart/form-data">
 <div align="right" style="padding-left: 80%; height: 80px; width: 200px;">
 	Bem-vindo<c:out value=" ${sessionScope.login}"/>
 <a href="http://localhost:8080/Trabalho_TI_DB/Login.do?method=logout"><img align="right" border="0" src="images/logout.gif" alt="Logout" title="Logout" /></a>
@@ -52,7 +52,7 @@ list-style-type: none;
 					</div>
 					<br/>
 					<div id="arquivoDiv" style="visibility: hidden;">
-						<jsp:include page="enviarArquivo.jsp"></jsp:include>
+						<jsp:include page="trans_upload.jsp"></jsp:include>
 					</div>
 					<div id="diretorioDiv" style="visibility: hidden;" >
 						<jsp:include page="criarDiretorio.jsp"></jsp:include>
@@ -65,5 +65,6 @@ list-style-type: none;
 			</c:if>
 		</div>
 	</div>
+	</html:form>
 </body>
 </html>

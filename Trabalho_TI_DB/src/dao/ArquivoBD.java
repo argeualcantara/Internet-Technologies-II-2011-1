@@ -188,7 +188,27 @@ public class ArquivoBD {
 		}
 		return list;
 	}
+	
+	public void criarDiretorio(int pai,String descricao, String login){
+		try {
+			String sql = "INSERT INTO ARQ_DIR(NOME,PAI,DIRETORIO,LOGIN_USUARIO) VALUES(?,?,1,?)";
 
+			Connection con = null;
+			PreparedStatement st = null;
+
+			con = BD.getCon();
+			st = con.prepareStatement(sql);
+			st.setString(1, descricao);
+			st.setInt(2, pai);
+			st.setString(3, login);
+			st.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private Timestamp buscarDataAtual() throws Exception{
 		Timestamp time = null;
 		Date data = new Date();

@@ -7,14 +7,13 @@
 <%@page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html:form action="Usuario.do?method=criarDiretorio">
+
 	<table>
 		<tr>
 			<td style="text-align: right;">Nome do diretório</td>
-			<td ><html:text style="border: ridge; border-color: #000000; border-width: 1px;" property="nome"/></td>
+			<td ><html:text style="border: ridge; border-color: #000000; border-width: 1px;" property="nomeDiretorio"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: center;"><html:button property="criar" value="Enviar" onclick="criarDiretorio();"/></td>
+			<td colspan="2" style="text-align: center;"><html:submit value="Enviar"/></td>
 		</tr>
 	</table>
-</html:form>
