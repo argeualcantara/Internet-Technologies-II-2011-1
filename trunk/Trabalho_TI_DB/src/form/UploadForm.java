@@ -10,6 +10,7 @@ public class UploadForm extends ActionForm {
 	private FormFile arquivo = null; 
 	private String[] pais;
 	private String descricao;
+	private String nomeDiretorio;
 
 	private String tipoArquivo;
 
@@ -43,6 +44,14 @@ public class UploadForm extends ActionForm {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public void setNomeDiretorio(String nomeDiretorio) {
+		this.nomeDiretorio = nomeDiretorio;
+	}
+
+	public String getNomeDiretorio() {
+		return nomeDiretorio;
 	} 
 	
 }
