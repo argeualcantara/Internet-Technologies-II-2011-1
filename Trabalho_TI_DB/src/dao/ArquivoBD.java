@@ -23,6 +23,24 @@ public class ArquivoBD {
 		return instance;
 	}
 
+	public void deletar(String id){
+		try {
+			String sql = "DELETE FROM ARQ_DIR WHERE ID = ?";
+
+			Connection con = null;
+			PreparedStatement st = null;
+			
+			con = BD.getCon();
+			st = con.prepareStatement(sql.toString());
+			st.setString(1, id);
+			
+			st.executeUpdate();
+			BD.closeCon();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Arquivo> buscarArquivos(String login, String nome) {
 		List<Arquivo> list = new ArrayList<Arquivo>();
 		try {
