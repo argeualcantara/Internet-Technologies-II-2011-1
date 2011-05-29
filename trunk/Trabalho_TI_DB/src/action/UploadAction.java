@@ -80,5 +80,14 @@ public class UploadAction extends DispatchAction {
 		System.out.println("sucesso");
 		return mapping.findForward("sucesso");
 	}
+	
+	public ActionForward apagar(ActionMapping mapping, 
+			ActionForm form, 
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		
+		System.out.println("sucesso");
+		return mapping.findForward("sucesso");
+	}
 
 }
