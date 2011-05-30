@@ -15,7 +15,6 @@ import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
 import dao.ArquivoBD;
-
 import form.UploadForm;
 
 public class UploadAction extends DispatchAction {
@@ -28,6 +27,8 @@ public class UploadAction extends DispatchAction {
 
 
         UploadForm uploadForm = (UploadForm)form;
+        HttpSession session=request.getSession();
+        String login=session.getAttribute("login").toString();
 
 		try {
 			if(uploadForm.getDescricao()!=null && !(uploadForm.getDescricao().equals(""))){
@@ -47,9 +48,8 @@ public class UploadAction extends DispatchAction {
 				long tamanho = formFile.getFileSize();
 				int id = 0;
 				
-				// AUMENTAR O TAMANHO DO VARCHAR DE NOME!
 				for (int i = 0; i < pais.length; i++) {
-					id = ArquivoBD.getInstance().inserirArquivo(nome, Integer.parseInt(pais[i]), tamanho, "MASTER", descricao);
+					id = ArquivoBD.getInstance().inserirArquivo(nome, Integer.parseInt(pais[i]), tamanho, login, descricao);
 					System.out.println(id);
 				}
 				
@@ -64,10 +64,8 @@ public class UploadAction extends DispatchAction {
 				out.write(dataFile);
 				out.close();
 			}else{
-				HttpSession session=request.getSession();
 				String [] pais= uploadForm.getPais();
 				String nomeDiretorio = uploadForm.getNomeDiretorio();
-				String login=session.getAttribute("login").toString();
 				for(int i=0; i<pais.length; i++){
 					ArquivoBD.getInstance().criarDiretorio(Integer.parseInt(pais[i]), nomeDiretorio, login);
 				}
@@ -85,6 +83,14 @@ public class UploadAction extends DispatchAction {
 			ActionForm form, 
 			HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
+
+        UploadForm uploadForm = (UploadForm)form;
+        
+		if(uploadForm.getDescricao()!=null && !(uploadForm.getDescricao().equals(""))){
+			
+		}else{
+			
+		}
 		
 		System.out.println("sucesso");
 		return mapping.findForward("sucesso");
