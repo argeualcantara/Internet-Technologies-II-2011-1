@@ -45,7 +45,8 @@ public class UploadForm extends ActionForm {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
+	
 	public void setNomeDiretorio(String nomeDiretorio) {
 		this.nomeDiretorio = nomeDiretorio;
 	}
@@ -53,5 +54,4 @@ public class UploadForm extends ActionForm {
 	public String getNomeDiretorio() {
 		return nomeDiretorio;
 	} 
-	
 }
